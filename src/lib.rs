@@ -12,6 +12,7 @@ pub struct Fr(FrRepr);
 
 // pub mod fast;
 // mod constants;
+// pub mod ark;
 
 // #[derive(Debug)]
 pub struct Constants {
@@ -104,10 +105,13 @@ pub fn mix(params: &Constants, state: &mut [Fr], aux: &mut [Fr], res: &mut [Fr])
     //             });
     //     });
 
-    state.copy_from_slice(&res);
+    state.copy_from_slice(res);
 }
 
 pub fn hash(params: &Constants, state: &mut [Fr], aux1: &mut [Fr], aux2: &mut [Fr]) -> String {
+    // avoid auto params c index assert.
+    assert!(params.c.len() == params.round3);
+
     (0..params.round3)
         .for_each(|i| {
             state.iter_mut().for_each(|s| s.add_assign(&params.c[i]));
