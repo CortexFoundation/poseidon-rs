@@ -12,16 +12,18 @@ readme = "README.md"
 debug = false
 
 [lib]
-name = "poseidon_rs"
+name = "crypto_rs"
 crate-type = ["cdylib"]
 
 [dependencies]
 pyo3 = { version = "0.16.5", features = ["extension-module"] }
 
-ff = {package="ff_ce" , version="0.12", features = ["derive"]}
 rand = "0.4"
 rayon = "1.5.3"
+lazy_static = "1.4.0"
 
+ff = { package="ff_ce" , version="0.12", features = ["derive"] }
+num-bigint = { version = "0.4" }
 ark-ff = { version = "0.3.0", features = [ "asm" ] }
 
 [dev-dependencies]
